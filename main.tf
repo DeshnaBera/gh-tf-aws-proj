@@ -15,30 +15,30 @@ resource "aws_dynamodb_table" "students" {
 }
 
 resource "aws_lambda_function" "add_student" {
- function_name = "add_student"
- handler      = "lambda.add_student"
- runtime      = "python3.8"
- memory_size = 128
- role = aws_iam_role.lambda.arn
- source_code_hash = filebase64("${path.module}/lambda/add_student.zip")
- environment {
-   variables = {
-     DYNAMODB_TABLE = aws_dynamodb_table.students.name
-   }
- }
+    filename = "C:/Users/2121490/gh-tf-aws-proj/lambda/add_student.zip"
+    function_name = "add_student"
+    handler      = "lambda.add_student"
+    runtime      = "python3.8"
+    memory_size = 128
+    role = aws_iam_role.lambda.arn
+    environment {
+        variables = {
+            DYNAMODB_TABLE = aws_dynamodb_table.students.name
+        }
+    }
 }
 
 resource "aws_lambda_function" "list_students" {
- function_name = "list_students"
- handler      = "lambda.list_students"
- runtime      = "python3.8"
- role = aws_iam_role.lambda.arn
- source_code_hash = filebase64("${path.module}/lambda/list_students.zip")
- environment {
-   variables = {
-     DYNAMODB_TABLE = aws_dynamodb_table.students.name
-   }
- }
+    filename = "C:/Users/2121490/gh-tf-aws-proj/lambda/list_students.zip"
+    function_name = "list_students"
+    handler      = "lambda.list_students"
+    runtime      = "python3.8"
+    role = aws_iam_role.lambda.arn
+    environment {
+        variables = {
+            DYNAMODB_TABLE = aws_dynamodb_table.students.name
+        }
+    }
 }
 
 resource "aws_iam_role" "lambda" {
