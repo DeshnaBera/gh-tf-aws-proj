@@ -5,14 +5,12 @@ provider "aws" {
 resource "aws_dynamodb_table" "students" {
  name           = "students"
  billing_mode   = "PAY_PER_REQUEST"
+ read_capacity  = 1
+ write_capacity = 1
  hash_key       = "studentId"
  attribute {
    name = "studentId"
    type = "S"
- }
- provisioned_throughput{
-    read_capacity = 1
-    write_capacity = 1
  }
 }
 
