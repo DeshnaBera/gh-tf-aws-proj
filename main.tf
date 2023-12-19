@@ -86,7 +86,7 @@ resource "aws_api_gateway_method" "add_student_method" {
  authorization = "NONE"
 }
 
-resorce "aws_api_gateway_method" "list_students_method" {
+resource "aws_api_gateway_method" "list_students_method" {
  rest_api_id   = aws_api_gateway_rest_api.students_api.id
  resource_id   = aws_api_gateway_resource.list_students_resource.id
  http_method   = "GET"
