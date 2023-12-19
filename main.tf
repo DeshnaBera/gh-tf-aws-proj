@@ -15,7 +15,7 @@ resource "aws_dynamodb_table" "students" {
 }
 
 resource "aws_lambda_function" "add_student" {
-    filename = "C:/Users/2121490/gh-tf-aws-proj/lambda/add_student.zip"
+    filename = "add_student.zip"
     function_name = "add_student"
     handler      = "lambda.add_student"
     runtime      = "python3.8"
@@ -29,7 +29,7 @@ resource "aws_lambda_function" "add_student" {
 }
 
 resource "aws_lambda_function" "list_students" {
-    filename = "C:/Users/2121490/gh-tf-aws-proj/lambda/list_students.zip"
+    filename = "list_students.zip"
     function_name = "list_students"
     handler      = "lambda.list_students"
     runtime      = "python3.8"
