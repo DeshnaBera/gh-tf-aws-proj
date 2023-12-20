@@ -81,12 +81,14 @@ resource "aws_api_gateway_method" "add_student_method" {
  rest_api_id   = aws_api_gateway_rest_api.students_api.id
  resource_id   = aws_api_gateway_resource.add_student_resource.id
  http_method   = "POST"
+ authorization = "AWS_IAM"
 }
 
 resource "aws_api_gateway_method" "list_students_method" {
  rest_api_id   = aws_api_gateway_rest_api.students_api.id
  resource_id   = aws_api_gateway_resource.list_students_resource.id
  http_method   = "GET"
+ authorization = "AWS_IAM"
 }
 
 resource "aws_api_gateway_integration" "add_student_integration" {
