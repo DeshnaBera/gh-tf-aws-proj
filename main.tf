@@ -63,17 +63,17 @@ EOF
  inline_policy {
    name = "dynamodb_policy"
    policy = <<EOF
+{
+ "Version": "2012-10-17",
+ "Statement": [
    {
-      "Version": "2012-10-17",
-      "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": "dynamodb:*",
-        "Resource": "*"
-      }
-      ]
-    }
-  EOF
+     "Effect": "Allow",
+     "Action": "dynamodb:*",
+     "Resource": "*"
+   }
+ ]
+}
+EOF
  }
 
 }
