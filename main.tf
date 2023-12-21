@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "students" {
 resource "aws_lambda_function" "add_student" {
     filename = "add_student.zip"
     function_name = "add_student"
-    handler      = "lambda.add_student"
+    handler      = "app.lambda_handler"
     runtime      = "python3.8"
     memory_size = 128
     role = aws_iam_role.lambda.arn
@@ -31,7 +31,7 @@ resource "aws_lambda_function" "add_student" {
 resource "aws_lambda_function" "list_students" {
     filename = "list_students.zip"
     function_name = "list_students"
-    handler      = "lambda.list_students"
+    handler      = "app.lambda_handler"
     runtime      = "python3.8"
     role = aws_iam_role.lambda.arn
     environment {
