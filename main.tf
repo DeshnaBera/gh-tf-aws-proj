@@ -58,6 +58,24 @@ resource "aws_iam_role" "lambda" {
  ]
 }
 EOF
+
+# Attach the DynamoDB policy
+ inline_policy {
+   name = "dynamodb_policy"
+   policy = <<EOF
+   {
+      "Version": "2012-10-17",
+      "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": "dynamodb:*",
+        "Resource": "*"
+      }
+      ]
+    }
+  EOF
+ }
+
 }
 
 resource "aws_api_gateway_rest_api" "students_api" {
