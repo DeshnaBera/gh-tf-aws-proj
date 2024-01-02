@@ -137,7 +137,7 @@ resource "aws_lambda_permission" "add_student_permission" {
  action        = "lambda:InvokeFunction"
  function_name = aws_lambda_function.add_student.function_name
  principal     = "apigateway.amazonaws.com"
- source_arn    = aws_api_gateway_rest_api.students_api.execution_arn
+ //source_arn    = aws_api_gateway_rest_api.students_api.execution_arn
 }
 
 resource "aws_lambda_permission" "list_students_permission" {
@@ -145,7 +145,7 @@ resource "aws_lambda_permission" "list_students_permission" {
  action        = "lambda:InvokeFunction"
  function_name = aws_lambda_function.list_students.function_name
  principal     = "apigateway.amazonaws.com"
- source_arn    = aws_api_gateway_rest_api.students_api.execution_arn
+ //source_arn    = aws_api_gateway_rest_api.students_api.execution_arn
 }
 
 resource "aws_api_gateway_deployment" "students_api_deployment" {
