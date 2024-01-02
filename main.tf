@@ -149,6 +149,10 @@ resource "aws_lambda_permission" "list_students_permission" {
 }
 
 resource "aws_api_gateway_deployment" "students_api_deployment" {
+  depends_on = [
+   aws_api_gateway_integration.add_student_integration,
+   aws_api_gateway_integration.list_students_integration
+ ]
  rest_api_id = aws_api_gateway_rest_api.students_api.id
 }
 
