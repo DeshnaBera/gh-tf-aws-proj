@@ -78,6 +78,11 @@ EOF
 
 }
 
+resource "aws_iam_policy_attachment" "students" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.lambda.name
+}
+
 resource "aws_api_gateway_rest_api" "students_api" {
  name        = "students_api"
  description = "API for managing students"
