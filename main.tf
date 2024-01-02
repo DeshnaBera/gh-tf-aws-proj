@@ -113,6 +113,7 @@ resource "aws_api_gateway_integration" "add_student_integration" {
  rest_api_id             = aws_api_gateway_rest_api.students_api.id
  resource_id             = aws_api_gateway_resource.add_student_resource.id
  http_method             = aws_api_gateway_method.add_student_method.http_method
+ integration_http_method = "POST"
  type                    = "AWS_PROXY"
  uri                     = aws_lambda_function.add_student.invoke_arn
 }
@@ -121,6 +122,7 @@ resource "aws_api_gateway_integration" "list_students_integration" {
  rest_api_id             = aws_api_gateway_rest_api.students_api.id
  resource_id             = aws_api_gateway_resource.list_students_resource.id
  http_method             = aws_api_gateway_method.list_students_method.http_method
+ integration_http_method = "GET"
  type                    = "AWS_PROXY"
  uri                     = aws_lambda_function.list_students.invoke_arn
 }
