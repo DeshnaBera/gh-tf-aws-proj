@@ -150,7 +150,12 @@ resource "aws_lambda_permission" "list_students_permission" {
 
 resource "aws_api_gateway_deployment" "students_api_deployment" {
  rest_api_id = aws_api_gateway_rest_api.students_api.id
- stage_name  = "prod"
+}
+
+resource "aws_api_gateway_stage" "example" {
+  deployment_id = aws_api_gateway_deployment.students_api_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.students_api.id
+  stage_name    = "example"
 }
 
 output "api_gateway_url" {
