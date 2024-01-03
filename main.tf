@@ -20,7 +20,7 @@ resource "aws_dynamodb_table" "students" {
  write_capacity = 1
  hash_key       = "studentId"
  attribute {
-   name = "studentId"
+   name = "Id"
    type = "S"
  }
 }
