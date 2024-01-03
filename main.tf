@@ -2,14 +2,15 @@ provider "aws" {
  region = "us-east-1" 
 }
 
-terraform {
-  backend "s3" {
+data "terraform_remote_state" "network" {
+  backend = "s3"
+  config = {
     bucket = "mytf-state-file"
     key    = "terraform.tfstate"
     region = "us-east-1"
-    dynamodb_table = "TfStateLock"
   }
 }
+
 
 
 resource "aws_dynamodb_table" "students" {
