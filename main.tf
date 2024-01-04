@@ -16,7 +16,7 @@ terraform {
 
 resource "aws_dynamodb_table" "students" {
  name           = "students"
- billing_mode   = "PROVISIONED"
+ billing_mode   = "PAY_PER_REQUEST"
  hash_key       = "Id"
  attribute {
    name = "Id"
