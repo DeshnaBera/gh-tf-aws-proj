@@ -16,10 +16,12 @@ terraform {
 
 resource "aws_dynamodb_table" "students" {
  name           = "students"
- billing_mode   = "PAY_PER_REQUEST"
- hash_key       = "Id"
+ billing_mode   = "PROVISIONED"
+ read_capacity = 1
+ write_capacity = 1
+ hash_key       = "studentId"
  attribute {
-   name = "Id"
+   name = "studentId"
    type = "S"
  }
 }
