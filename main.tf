@@ -8,6 +8,7 @@ data "terraform_remote_state" "network" {
     bucket = "mytf-state-file"
     key    = "terraform.tfstate"
     region = "us-east-1"
+    dynamodb_table = "TfStateLock"
   }
 }
 
