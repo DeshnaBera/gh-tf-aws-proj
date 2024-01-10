@@ -71,24 +71,31 @@ resource "aws_iam_role" "lambda" {
 }
 EOF
 
-# Attach the DynamoDB policy
- inline_policy {
-   name = "dynamodb_policy"
-   policy = <<EOF
-{
- "Version": "2012-10-17",
- "Statement": [
-   {
-     "Effect": "Allow",
-     "Action": "dynamodb:*",
-     "Resource": "*"
-   }
- ]
 }
-EOF
- }
 
-}
+# resource "aws_iam_policy" "policy" {
+#   name        = "getfromdb_policy"
+#   description = "My test policy"
+
+#   # Terraform's "jsonencode" function converts a
+#   # Terraform expression result to valid JSON syntax.
+#   policy = jsonencode({
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Effect": "Allow",
+#             "Action": [
+#                 "dynamodb:DeleteItem",
+#                 "dynamodb:GetItem",
+#                 "dynamodb:PutItem",
+#                 "dynamodb:Scan",
+#                 "dynamodb:UpdateItem"
+#             ],
+#             "Resource": "arn:aws:dynamodb:us-east-1:486152014133:table/*"
+#         }
+#     ]
+# })
+# }
 
 resource "aws_iam_role_policy_attachment" "students" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
@@ -103,13 +110,13 @@ resource "aws_api_gateway_rest_api" "students_api" {
 resource "aws_api_gateway_resource" "add_student_resource" {
  rest_api_id = aws_api_gateway_rest_api.students_api.id
  parent_id   = aws_api_gateway_rest_api.students_api.root_resource_id
- path_part   = "addStudent"
+ path_part   = "add_student"
 }
 
 resource "aws_api_gateway_resource" "list_students_resource" {
  rest_api_id = aws_api_gateway_rest_api.students_api.id
  parent_id   = aws_api_gateway_rest_api.students_api.root_resource_id
- path_part   = "listStudent"
+ path_part   = "list_students"
 }
 
 resource "aws_api_gateway_method" "add_student_method" {
@@ -139,7 +146,7 @@ resource "aws_api_gateway_integration" "list_students_integration" {
  rest_api_id             = aws_api_gateway_rest_api.students_api.id
  resource_id             = aws_api_gateway_resource.list_students_resource.id
  http_method             = aws_api_gateway_method.list_students_method.http_method
- integration_http_method = "GET"
+ integration_http_method = "POST"
  type                    = "AWS_PROXY"
  uri                     = aws_lambda_function.list_students.invoke_arn
 }
