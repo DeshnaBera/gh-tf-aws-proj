@@ -73,32 +73,32 @@ EOF
 
 }
 
-# resource "aws_iam_policy" "policy" {
-#   name        = "getfromdb_policy"
-#   description = "My test policy"
+resource "aws_iam_policy" "policy" {
+  name        = "getfromdb_policy"
+  description = "My test policy"
 
-#   # Terraform's "jsonencode" function converts a
-#   # Terraform expression result to valid JSON syntax.
-#   policy = jsonencode({
-#     "Version": "2012-10-17",
-#     "Statement": [
-#         {
-#             "Effect": "Allow",
-#             "Action": [
-#                 "dynamodb:DeleteItem",
-#                 "dynamodb:GetItem",
-#                 "dynamodb:PutItem",
-#                 "dynamodb:Scan",
-#                 "dynamodb:UpdateItem"
-#             ],
-#             "Resource": "arn:aws:dynamodb:us-east-1:486152014133:table/*"
-#         }
-#     ]
-# })
-# }
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:DeleteItem",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:Scan",
+                "dynamodb:UpdateItem"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-1:486152014133:table/*"
+        }
+    ]
+})
+}
 
 resource "aws_iam_role_policy_attachment" "students" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  policy_arn = aws_iam_policy.policy.arn
   role       = aws_iam_role.lambda.name
 }
 
